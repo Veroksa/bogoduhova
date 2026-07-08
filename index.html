@@ -19,6 +19,7 @@
           <li><a href="#gallery">Фото</a></li> <!-- добавим отдельный раздел для фото -->
           <li><a href="#contacts">Контакты</a></li>
           <li><a href="#order" class="btn-order">Оставить заявку</a></li>
+          <li><a href="#catalog" class="btn-order" style="background:#3498db;">Заказать каталог</a></li>
         </ul>
       </nav>
       <!-- Бургер-меню для мобильных -->
@@ -34,6 +35,7 @@
       <h1>Поставка мебели для школ и детских садов</h1>
       <p>Работаем по всему Краснодарскому краю и ЮФО</p>
       <a href="#order" class="btn-primary">Оставить заявку</a>
+      <a href="#catalog" class="btn-primary" style="background:#3498db; margin-left:15px;">Заказать каталог</a>
     </div>
   </section>
 
@@ -112,6 +114,20 @@
     </div>
   </section>
 
+  <!-- Заказать каталог -->
+<section id="catalog" class="section order">
+  <div class="container">
+    <h2>Заказать каталог</h2>
+    <form id="catalogForm" action="https://formspree.io/f/xykqabor" method="POST">
+      <input type="text" name="name" placeholder="Ваше имя" required>
+      <input type="tel" name="phone" placeholder="Телефон" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <button type="submit" class="btn-primary">Заказать каталог</button>
+      <p id="catalogStatus"></p>
+    </form>
+  </div>
+</section>
+  
   <!-- Футер -->
   <footer>
     <div class="container">
