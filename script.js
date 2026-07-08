@@ -73,4 +73,29 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   }
+  // Отправка формы "Заказать каталог"
+const catalogForm = document.getElementById('catalogForm');
+const catalogStatus = document.getElementById('catalogStatus');
+if (catalogForm) {
+  catalogForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const data = new FormData(catalogForm);
+    fetch(catalogForm.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        catalogStatus.innerHTML = '✅ Заявка на каталог отправлена! Мы свяжемся с вами.';
+        catalogForm.reset();
+      } else {
+        catalogStatus.innerHTML = '❌ Ошибка при отправке. Попробуйте позже.';
+      }
+    })
+    .catch(() => {
+      catalogStatus.innerHTML = '❌ Ошибка сети. Проверьте соединение.';
+    });
+  });
+}
 });
