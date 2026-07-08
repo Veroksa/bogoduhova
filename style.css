@@ -43,8 +43,12 @@ header {
 .nav-menu {
   list-style: none;
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;        /* разрешаем перенос на новую строку, если не влезают */
+  gap: 10px 15px;         /* отступы между пунктами (по вертикали 10px, по горизонтали 15px) */
   align-items: center;
+  justify-content: center; /* центрируем меню */
+  margin: 0;
+  padding: 0;
 }
 
 .nav-menu li a {
