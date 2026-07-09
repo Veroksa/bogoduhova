@@ -305,4 +305,15 @@ footer {
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     border: 3px solid #fff;
 }
+  /* Фиксированный размер логотипа на главной странице */
+.home-logo {
+    width: 100px !important;
+    height: 100px !important;
+    max-width: 100px !important;
+    min-width: 100px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
 }
