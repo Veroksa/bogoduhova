@@ -98,4 +98,19 @@ if (catalogForm) {
     });
   });
 }
+  // Lightbox: открытие фото на весь экран
+const galleryImages = document.querySelectorAll('#galleryGrid img');
+const overlay = document.getElementById('lightboxOverlay');
+const lightboxImg = document.getElementById('lightboxImage');
+
+galleryImages.forEach(img => {
+    img.addEventListener('click', function() {
+        lightboxImg.src = this.src;
+        overlay.classList.add('active');
+    });
+});
+
+overlay.addEventListener('click', function() {
+    this.classList.remove('active');
+});
 });
