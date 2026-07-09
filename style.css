@@ -278,4 +278,20 @@ footer {
   .gallery-grid {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   }
+  /* Стили для кнопок на главной странице */
+.home .btn-primary {
+    display: inline-block;
+    margin: 10px 15px;
+}
+
+/* Мобильная версия: кнопки друг под другом по центру */
+@media (max-width: 768px) {
+    .home .btn-primary {
+        display: block;
+        width: 80%;
+        max-width: 300px;
+        margin: 10px auto;
+        text-align: center;
+    }
+}
 }
