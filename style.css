@@ -297,8 +297,8 @@ footer {
   /* Большой логотип по центру на главной странице */
 .home-logo {
     display: block;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
     margin: 0 auto 20px auto;
