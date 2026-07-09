@@ -307,10 +307,10 @@ footer {
 }
   /* Фиксированный размер логотипа на главной странице */
 .home-logo {
-    width: 100px !important;
-    height: 100px !important;
-    max-width: 100px !important;
-    min-width: 100px !important;
+    width: 150px !important;
+    height: 150px !important;
+    max-width: 150px !important;
+    min-width: 150px !important;
     border-radius: 50% !important;
     object-fit: cover !important;
     display: block !important;
