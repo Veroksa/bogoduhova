@@ -341,4 +341,24 @@ footer {
 .lightbox-overlay.active {
     display: flex;
 }
+  /* Гарантированное отображение фото в галерее на всех экранах */
+.gallery-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+    gap: 20px !important;
+}
+
+.gallery-grid img {
+    width: 100% !important;
+    height: 200px !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1) !important;
+    transition: transform 0.3s !important;
+    display: block !important;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.03) !important;
+}
 }
