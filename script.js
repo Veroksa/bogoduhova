@@ -98,19 +98,58 @@ if (catalogForm) {
     });
   });
 }
-  // Lightbox: открытие фото на весь экран
-const galleryImages = document.querySelectorAll('#galleryGrid img');
-const overlay = document.getElementById('lightboxOverlay');
-const lightboxImg = document.getElementById('lightboxImage');
+// ===== ЛАЙТБОКС ДЛЯ ФОТО (РАБОТАЕТ НА ВСЕХ УСТРОЙСТВАХ) =====
+document.addEventListener('DOMContentLoaded', function() {
+    const overlay = document.getElementById('lightboxOverlay');
+    const lightboxImg = document.getElementById('lightboxImage');
+    const galleryGrid = document.getElementById('galleryGrid');
 
-galleryImages.forEach(img => {
-    img.addEventListener('click', function() {
-        lightboxImg.src = this.src;
+    if (!overlay || !lightboxImg || !galleryGrid) {
+        console.warn('Элементы лайтбокса не найдены');
+        return;
+    }
+
+    // Обработчик клика по всей галерее (делегирование)
+    galleryGrid.addEventListener('click', function(e) {
+        // Находим ближайший тег img внутри кликнутого элемента
+        const img = e.target.closest('img');
+        if (!img) return; // если клик не по картинке — выходим
+
+        // Проверяем, что картинка загружена
+        if (!img.src) return;
+
+        // Устанавливаем src в модальное окно
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt || 'Фото мебели';
+
+        // Показываем лайтбокс
         overlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // запрещаем скролл фона
     });
-});
 
-overlay.addEventListener('click', function() {
-    this.classList.remove('active');
+    // Закрытие по клику на фон (на само затемнение)
+    overlay.addEventListener('click', function(e) {
+        // Если клик был по самому оверлею, а не по картинке
+        if (e.target === overlay) {
+            closeLightbox();
+        }
+    });
+
+    // Закрытие по клавише ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+
+    // Функция закрытия лайтбокса
+    function closeLightbox() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+        lightboxImg.src = '';
+    }
+
+    // Если есть кнопка закрытия, можно добавить (по желанию)
+    // Но в данном случае закрытие работает по клику на фон
 });
 });
