@@ -313,7 +313,7 @@ footer {
     display: block !important;
     margin: 0 auto !important;
 }
-  /* Lightbox (модальное окно для фото) */
+  /* Lightbox с затемнением */
 .lightbox-overlay {
     display: none;
     position: fixed;
@@ -322,58 +322,21 @@ footer {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.9);
-    z-index: 1000;
-    cursor: pointer;
+    z-index: 9999;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+}
+
+.lightbox-overlay.active {
+    display: flex;
 }
 
 .lightbox-overlay img {
     max-width: 90%;
     max-height: 90%;
     border-radius: 8px;
-    box-shadow: 0 0 30px rgba(255,255,255,0.2);
-}
-
-.lightbox-overlay.active {
-    display: flex;
-}
-  /* Гарантированное отображение фото в галерее на всех экранах */
-.gallery-grid {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
-    gap: 20px !important;
-}
-
-.gallery-grid img {
-    width: 100% !important;
-    height: 200px !important;
-    object-fit: cover !important;
-    border-radius: 8px !important;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1) !important;
-    transition: transform 0.3s !important;
-    display: block !important;
-}
-
-.gallery-grid img:hover {
-    transform: scale(1.03) !important;
-}
-  /* Принудительное отображение галереи — НЕ УДАЛЯТЬ! */
-.gallery-grid,
-#galleryGrid {
-    display: grid !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    min-height: 100px;
-}
-
-.gallery-grid img,
-#galleryGrid img {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    width: 100% !important;
-    height: 200px !important;
-    object-fit: cover !important;
+    box-shadow: 0 0 40px rgba(255,255,255,0.3);
+    object-fit: contain;
 }
 }
