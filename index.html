@@ -146,8 +146,8 @@
 
   <script src="script.js"></script>
       <!-- Lightbox (затемнение) -->
-<div class="lightbox-overlay" id="lightboxOverlay">
-    <img id="lightboxImage" src="" alt="Увеличенное фото">
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox(event)">
+    <img id="lightboxImage" src="" alt="Увеличенное фото" onclick="event.stopPropagation();">
 </div>
 </body>
 </html>
