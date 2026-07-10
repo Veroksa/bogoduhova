@@ -99,51 +99,30 @@ if (catalogForm) {
   });
 }
 // ===== ЛАЙТБОКС: РАБОТАЕТ НА ВСЕХ УСТРОЙСТВАХ =====
-document.addEventListener('DOMContentLoaded', function () {
-    const overlay = document.getElementById('lightboxOverlay');
-    const lightboxImg = document.getElementById('lightboxImage');
-    const gallery = document.getElementById('galleryGrid');
+function openLightbox(src, alt) {
+    var overlay = document.getElementById('lightboxOverlay');
+    var img = document.getElementById('lightboxImage');
+    img.src = src;
+    img.alt = alt || 'Фото мебели';
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
 
-    if (!overlay || !lightboxImg || !gallery) {
-        console.warn('Элементы лайтбокса не найдены');
-        return;
-    }
+function closeLightbox(e) {
+    if (e && e.target !== e.currentTarget) return;
+    var overlay = document.getElementById('lightboxOverlay');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    document.getElementById('lightboxImage').src = '';
+}
 
-    // Открытие при клике на фото (делегирование)
-    gallery.addEventListener('click', function (e) {
-        let target = e.target;
-        // Ищем ближайший тег img внутри кликнутого элемента
-        let img = target.closest('img');
-        if (!img) return;
-
-        // Проверяем, что картинка загружена и есть src
-        if (!img.src) return;
-
-        // Копируем src и alt в модальное окно
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt || 'Фото мебели';
-        overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    });
-
-    // Закрытие по клику на затемнение (на сам оверлей)
-    overlay.addEventListener('click', function (e) {
-        if (e.target === overlay) {
-            closeLightbox();
+// Закрытие по клавише ESC
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        var overlay = document.getElementById('lightboxOverlay');
+        if (overlay.classList.contains('active')) {
+            closeLightbox(e);
         }
-    });
-
-    // Закрытие по клавише Escape
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && overlay.classList.contains('active')) {
-            closeLightbox();
-        }
-    });
-
-    function closeLightbox() {
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-        lightboxImg.src = '';
     }
 });
 });
