@@ -129,4 +129,37 @@ document.addEventListener('keydown', function(e) {
         }
     }
 });
+  // ===== ДОПОЛНИТЕЛЬНЫЙ ОБРАБОТЧИК ДЛЯ ГАЛЕРЕИ (НЕ ТРОГАЕТ HTML) =====
+document.addEventListener('DOMContentLoaded', function() {
+    var gallery = document.getElementById('galleryGrid');
+    if (!gallery) {
+        console.warn('Галерея не найдена');
+        return;
+    }
+
+    // Находим все картинки внутри галереи
+    var images = gallery.querySelectorAll('img');
+    images.forEach(function(img) {
+        // Добавляем свой обработчик (он не мешает onclick)
+        img.addEventListener('click', function(e) {
+            // Если уже есть затемнение, не открываем повторно
+            var overlay = document.getElementById('lightboxOverlay');
+            if (overlay && overlay.classList.contains('active')) return;
+
+            // Вызываем ту же функцию, что и в onclick
+            if (typeof openLightbox === 'function') {
+                openLightbox(this.src, this.alt);
+            } else {
+                // Если функция не определена — делаем сами
+                var overlay = document.getElementById('lightboxOverlay');
+                var lightboxImg = document.getElementById('lightboxImage');
+                if (!overlay || !lightboxImg) return;
+                lightboxImg.src = this.src;
+                lightboxImg.alt = this.alt || 'Фото мебели';
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+});
 });
