@@ -98,10 +98,12 @@ if (catalogForm) {
     });
   });
 }
-// ===== ЛАЙТБОКС: РАБОТАЕТ НА ВСЕХ УСТРОЙСТВАХ =====
+// ===== ЛАЙТБОКС: ОТКРЫТИЕ ФОТО НА ВЕСЬ ЭКРАН =====
+
 function openLightbox(src, alt) {
     var overlay = document.getElementById('lightboxOverlay');
     var img = document.getElementById('lightboxImage');
+    if (!overlay || !img) return;
     img.src = src;
     img.alt = alt || 'Фото мебели';
     overlay.classList.add('active');
@@ -111,16 +113,18 @@ function openLightbox(src, alt) {
 function closeLightbox(e) {
     if (e && e.target !== e.currentTarget) return;
     var overlay = document.getElementById('lightboxOverlay');
+    if (!overlay) return;
     overlay.classList.remove('active');
     document.body.style.overflow = '';
-    document.getElementById('lightboxImage').src = '';
+    var img = document.getElementById('lightboxImage');
+    if (img) img.src = '';
 }
 
 // Закрытие по клавише ESC
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         var overlay = document.getElementById('lightboxOverlay');
-        if (overlay.classList.contains('active')) {
+        if (overlay && overlay.classList.contains('active')) {
             closeLightbox(e);
         }
     }
