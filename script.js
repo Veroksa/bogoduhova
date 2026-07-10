@@ -1,105 +1,86 @@
-// Бургер-меню
+// ===== БУРГЕР-МЕНЮ =====
 document.addEventListener('DOMContentLoaded', function() {
-  const burger = document.getElementById('burger');
-  const navMenu = document.querySelector('.nav-menu');
-  
-  burger.addEventListener('click', function() {
-    navMenu.classList.toggle('active');
-  });
+    const burger = document.getElementById('burger');
+    const navMenu = document.querySelector('.nav-menu');
+    if (burger && navMenu) {
+        burger.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
 
-  // Закрываем меню при клике на ссылку (для мобильных)
-  document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-      navMenu.classList.remove('active');
-    });
-  });
+        // Закрываем меню при клике на ссылку (для мобильных)
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+            });
+        });
+    }
+});
 
-  // Плавный скролл к якорям
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// ===== ПЛАВНЫЙ СКРОЛЛ =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-
-  // Динамическая загрузка фото из папки img
-  const galleryGrid = document.getElementById('galleryGrid');
-  // Если вы хотите автоматически подгружать изображения, укажите их имена в массиве
-  // либо используйте перебор, но проще всего прописать вручную в HTML,
-  // потому что JS не может читать файловую систему на клиенте.
-  // Поэтому предлагаю просто вставить нужные картинки в HTML вручную или через JS список.
-  // Для удобства я создам массив с именами файлов (вы их потом замените).
-  const images = [
-    '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg'
-  ];
-  // Проверим, есть ли изображения в галерее, если нет – добавим заглушки
-  if (galleryGrid.children.length === 0) {
-    images.forEach(imgName => {
-      const img = document.createElement('img');
-      img.src = `img/${imgName}`;
-      img.alt = 'Мебель';
-      img.onerror = function() {
-        this.style.display = 'none'; // скрываем, если файла нет
-      };
-      galleryGrid.appendChild(img);
-    });
-  }
-
-  // Отправка формы (Formspree)
-  const form = document.getElementById('orderForm');
-  const status = document.getElementById('formStatus');
-  if (form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const data = new FormData(form);
-      fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(response => {
-        if (response.ok) {
-          status.innerHTML = '✅ Заявка отправлена! Мы свяжемся с вами.';
-          form.reset();
-        } else {
-          status.innerHTML = '❌ Ошибка при отправке. Попробуйте позже.';
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      })
-      .catch(() => {
-        status.innerHTML = '❌ Ошибка сети. Проверьте соединение.';
-      });
     });
-  }
-  // Отправка формы "Заказать каталог"
+});
+
+// ===== ОТПРАВКА ФОРМЫ "ОСТАВИТЬ ЗАЯВКУ" =====
+const orderForm = document.getElementById('orderForm');
+const orderStatus = document.getElementById('formStatus');
+if (orderForm) {
+    orderForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const data = new FormData(orderForm);
+        fetch(orderForm.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        })
+        .then(response => {
+            if (response.ok) {
+                orderStatus.innerHTML = '✅ Заявка отправлена! Мы свяжемся с вами.';
+                orderForm.reset();
+            } else {
+                orderStatus.innerHTML = '❌ Ошибка при отправке. Попробуйте позже.';
+            }
+        })
+        .catch(() => {
+            orderStatus.innerHTML = '❌ Ошибка сети. Проверьте соединение.';
+        });
+    });
+}
+
+// ===== ОТПРАВКА ФОРМЫ "ЗАКАЗАТЬ КАТАЛОГ" =====
 const catalogForm = document.getElementById('catalogForm');
 const catalogStatus = document.getElementById('catalogStatus');
 if (catalogForm) {
-  catalogForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const data = new FormData(catalogForm);
-    fetch(catalogForm.action, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    })
-    .then(response => {
-      if (response.ok) {
-        catalogStatus.innerHTML = '✅ Заявка на каталог отправлена! Мы свяжемся с вами.';
-        catalogForm.reset();
-      } else {
-        catalogStatus.innerHTML = '❌ Ошибка при отправке. Попробуйте позже.';
-      }
-    })
-    .catch(() => {
-      catalogStatus.innerHTML = '❌ Ошибка сети. Проверьте соединение.';
+    catalogForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const data = new FormData(catalogForm);
+        fetch(catalogForm.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        })
+        .then(response => {
+            if (response.ok) {
+                catalogStatus.innerHTML = '✅ Заявка на каталог отправлена! Мы свяжемся с вами.';
+                catalogForm.reset();
+            } else {
+                catalogStatus.innerHTML = '❌ Ошибка при отправке. Попробуйте позже.';
+            }
+        })
+        .catch(() => {
+            catalogStatus.innerHTML = '❌ Ошибка сети. Проверьте соединение.';
+        });
     });
-  });
 }
-// ===== ЛАЙТБОКС: ОТКРЫТИЕ ФОТО НА ВЕСЬ ЭКРАН =====
 
+// ===== ЛАЙТБОКС (ОТКРЫТИЕ ФОТО НА ВЕСЬ ЭКРАН) =====
+// Эти функции объявлены глобально, чтобы их можно было вызывать из HTML (onclick)
 function openLightbox(src, alt) {
     var overlay = document.getElementById('lightboxOverlay');
     var img = document.getElementById('lightboxImage');
@@ -129,37 +110,4 @@ document.addEventListener('keydown', function(e) {
         }
     }
 });
-  // ===== ДОПОЛНИТЕЛЬНЫЙ ОБРАБОТЧИК ДЛЯ ГАЛЕРЕИ (НЕ ТРОГАЕТ HTML) =====
-document.addEventListener('DOMContentLoaded', function() {
-    var gallery = document.getElementById('galleryGrid');
-    if (!gallery) {
-        console.warn('Галерея не найдена');
-        return;
-    }
 
-    // Находим все картинки внутри галереи
-    var images = gallery.querySelectorAll('img');
-    images.forEach(function(img) {
-        // Добавляем свой обработчик (он не мешает onclick)
-        img.addEventListener('click', function(e) {
-            // Если уже есть затемнение, не открываем повторно
-            var overlay = document.getElementById('lightboxOverlay');
-            if (overlay && overlay.classList.contains('active')) return;
-
-            // Вызываем ту же функцию, что и в onclick
-            if (typeof openLightbox === 'function') {
-                openLightbox(this.src, this.alt);
-            } else {
-                // Если функция не определена — делаем сами
-                var overlay = document.getElementById('lightboxOverlay');
-                var lightboxImg = document.getElementById('lightboxImage');
-                if (!overlay || !lightboxImg) return;
-                lightboxImg.src = this.src;
-                lightboxImg.alt = this.alt || 'Фото мебели';
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-        });
-    });
-});
-});
