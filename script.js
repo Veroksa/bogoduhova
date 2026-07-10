@@ -98,58 +98,52 @@ if (catalogForm) {
     });
   });
 }
-// ===== ЛАЙТБОКС ДЛЯ ФОТО (РАБОТАЕТ НА ВСЕХ УСТРОЙСТВАХ) =====
-document.addEventListener('DOMContentLoaded', function() {
+// ===== ЛАЙТБОКС: РАБОТАЕТ НА ВСЕХ УСТРОЙСТВАХ =====
+document.addEventListener('DOMContentLoaded', function () {
     const overlay = document.getElementById('lightboxOverlay');
     const lightboxImg = document.getElementById('lightboxImage');
-    const galleryGrid = document.getElementById('galleryGrid');
+    const gallery = document.getElementById('galleryGrid');
 
-    if (!overlay || !lightboxImg || !galleryGrid) {
+    if (!overlay || !lightboxImg || !gallery) {
         console.warn('Элементы лайтбокса не найдены');
         return;
     }
 
-    // Обработчик клика по всей галерее (делегирование)
-    galleryGrid.addEventListener('click', function(e) {
-        // Находим ближайший тег img внутри кликнутого элемента
-        const img = e.target.closest('img');
-        if (!img) return; // если клик не по картинке — выходим
+    // Открытие при клике на фото (делегирование)
+    gallery.addEventListener('click', function (e) {
+        let target = e.target;
+        // Ищем ближайший тег img внутри кликнутого элемента
+        let img = target.closest('img');
+        if (!img) return;
 
-        // Проверяем, что картинка загружена
+        // Проверяем, что картинка загружена и есть src
         if (!img.src) return;
 
-        // Устанавливаем src в модальное окно
+        // Копируем src и alt в модальное окно
         lightboxImg.src = img.src;
         lightboxImg.alt = img.alt || 'Фото мебели';
-
-        // Показываем лайтбокс
         overlay.classList.add('active');
-        document.body.style.overflow = 'hidden'; // запрещаем скролл фона
+        document.body.style.overflow = 'hidden';
     });
 
-    // Закрытие по клику на фон (на само затемнение)
-    overlay.addEventListener('click', function(e) {
-        // Если клик был по самому оверлею, а не по картинке
+    // Закрытие по клику на затемнение (на сам оверлей)
+    overlay.addEventListener('click', function (e) {
         if (e.target === overlay) {
             closeLightbox();
         }
     });
 
-    // Закрытие по клавише ESC
-    document.addEventListener('keydown', function(e) {
+    // Закрытие по клавише Escape
+    document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && overlay.classList.contains('active')) {
             closeLightbox();
         }
     });
 
-    // Функция закрытия лайтбокса
     function closeLightbox() {
         overlay.classList.remove('active');
         document.body.style.overflow = '';
         lightboxImg.src = '';
     }
-
-    // Если есть кнопка закрытия, можно добавить (по желанию)
-    // Но в данном случае закрытие работает по клику на фон
 });
 });
