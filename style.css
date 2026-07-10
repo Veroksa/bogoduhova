@@ -358,4 +358,22 @@ footer {
 .gallery-grid img:hover {
     transform: scale(1.03) !important;
 }
+  /* Принудительное отображение галереи — НЕ УДАЛЯТЬ! */
+.gallery-grid,
+#galleryGrid {
+    display: grid !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 100px;
+}
+
+.gallery-grid img,
+#galleryGrid img {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    height: 200px !important;
+    object-fit: cover !important;
+}
 }
