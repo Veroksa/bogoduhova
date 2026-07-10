@@ -313,7 +313,7 @@ footer {
     display: block !important;
     margin: 0 auto !important;
 }
-  /* Lightbox с затемнением */
+  /* Лайтбокс с затемнением */
 .lightbox-overlay {
     display: none;
     position: fixed;
@@ -327,11 +327,9 @@ footer {
     align-items: center;
     cursor: pointer;
 }
-
 .lightbox-overlay.active {
     display: flex;
 }
-
 .lightbox-overlay img {
     max-width: 90%;
     max-height: 90%;
